@@ -14,6 +14,15 @@
     --header-text: white;
   }
 
+.description-picture img{
+  max-width: 100%;
+}
+
+.description-price{
+  font-family: "abel";
+  font-size: 40px;
+}
+
 #top-header{
   display: flex;
   justify-content: space-between;
@@ -50,6 +59,13 @@ h1{
   font-size: 20px;
 }
 
+h2{
+  font-family: "kanit";
+}
+
+h4{
+  font-family: "kanit";
+}
 .hero{
   max-width: 100%;
   height: auto;
@@ -86,6 +102,30 @@ h3{
   justify-content: flex-end;
   width: 100%;
 }
+
+#inv-display{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border:#3b3b3b solid 2px;
+  border-radius: .25rem;
+  padding: 5px;
+}
+
+#inv-display a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.inventory-card{
+    background-color: rgba(102, 97, 97, 0.103);
+    padding: 10px;
+    min-height: 275px;
+    border-radius: 5px;
+    font-family: "abel";
+}
+
+
 
 .toolsLink{
   text-decoration: none;
@@ -124,6 +164,9 @@ h3{
   margin: 0;
 }
 
+.vehicle-description p{
+  font-family: "abel";
+}
 @media only screen and (min-width: 38rem) {
 
 body {
@@ -148,6 +191,7 @@ h1{
   font-family: "kanit";
   font-size: 40px;
 }
+
 
 h3{
   font-size: 30px;
@@ -176,6 +220,23 @@ nav li{
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+#inv-display{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border:#3b3b3b solid 2px;
+  border-radius: .25rem;
+  padding: 5px;
+}
+
+#inv-display a{
+  text-decoration: none;
+  color: inherit;
 }
 
 .reviews ul{

@@ -6,13 +6,19 @@
     <div id="wrapper">
         <%- include('../partials/header')  %>
         <%- include('../partials/navigation') %>
-        <%- include('../partials/hero') %>
+        <% if (typeof showHero !== 'undefined' && showHero) { %>
+        <div id="hero">
+            <%- include('../partials/hero') %>
+        </div>
+        <% } %>
 
         <main>
+            <% if (typeof showUpgrades !== 'undefined' && showUpgrades) { %>
             <div id="reviews-upgrades">
                 <%- include('../partials/reviews') %>  
                 <%- include('../partials/upgrades') %>
             </div>
+            <% } %>
             <%- body %>
         </main>
 
