@@ -1,6 +1,6 @@
 /* ******************************************
  * This server.js file is the primary file of the 
- * application. It is used to control the project.
+ * application. It is used to control the project.          This contains all the required implementations
  *******************************************/
 
 
@@ -14,8 +14,36 @@ const expressLayouts = require("express-ejs-layouts")
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities/");
 const errorRoute = require("./routes/errorRoute")
+const session = require("express-session")
+const pool = require('./database/')
+
+
+/* ***********************
+ * Middleware
+ * ************************/
+
+//Session
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Messages Middileware
+
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 /* ***********************
  * View Engine abd Templates
@@ -34,6 +62,11 @@ app.use("/inv", inventoryRoute)
 
 app.use(express.static("public"))
 
+// Account Route
+// app.use("/account", require("./routes/accountRoute"))
+app.use("/account", accountRoute)
+
+// Errors Routes
 app.use("/errors", errorRoute)
 
 app.use(async (req, res, next) => {
