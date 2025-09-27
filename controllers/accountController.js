@@ -10,4 +10,17 @@ async function buildLogin(req, res, next) {
         showUpgrades: false,
     })
 }
-module.exports = buildLogin
+
+async function buildRegister(req, res, next) {
+    let nav = await utilities.getNav()
+    req.flash("notice", "This is a flash message")
+    res.render("account/register", {
+        title: "Register",
+        nav,
+        showHero: false,
+        showUpgrades: false,
+        errors: null
+    })
+}
+
+module.exports = { buildLogin, buildRegister }

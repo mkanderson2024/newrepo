@@ -86,7 +86,7 @@ app.use((err, req, res, next) => {
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
 
   let message
-  if(err.status == 404){ message = err.message} else {message = 'Oooohman. Lost all your lugnuts that time....'}
+  if(err.status == 404){ message = err.message} else {message = 'Oooohman. Lost all your lugnuts that time.... Check your route'}
 
 
   res.status(err.status|| 500).render("errors/error", {

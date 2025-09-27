@@ -23,6 +23,10 @@
   font-size: 40px;
 }
 
+.email-label, .password-label, .first-name-label, .last-name-label{
+  font-family: "kanit";
+}
+
 #top-header{
   display: flex;
   justify-content: space-between;
@@ -125,7 +129,43 @@ h3{
     font-family: "abel";
 }
 
+.email-input, .passsword-input, .first-name-input, .last-name-input{
+  font-size: 25px;
+}
 
+.login-button, .register-button{
+  display: block;
+  margin: 0 auto;
+  font-family: "kanit";
+  font-size: 25px;
+}
+
+.login-form, .register-form{
+  font-size: 25px;
+  background-color: #6699CC;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+}
+
+.login-form-group, .register-form-group{
+  justify-items: start;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.no-account{
+  font-family: "kanit";
+}
+
+.password-label{
+  font-family: "kanit";
+}
 
 .toolsLink{
   text-decoration: none;

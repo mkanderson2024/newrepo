@@ -1,0 +1,32 @@
+<!-- Content heading -->
+ <% if (title) { %>
+    <h1><%= title %></h1>
+    <% } %>
+
+    <%# messages () %>
+<section class="register-form">
+    <form method="post">
+        <div class="register-form-group">
+            <label class="first-name-label" for="first-name">*First Name:</label>
+            <input class="first-name-input" type="text" id="first-name" name="first-name" required placeholder="John">
+        </div>
+        <div class="register-form-group">
+            <label class="last-name-label" for="last-name">*Last Name:</label>
+            <input class="last-name-input" type="text" id="last-name" name="last-name" required placeholder="Doe">
+        </div>
+        <div class="register-form-group">
+        <!-- Email -->
+            <label class="email-label" for="email">*Email:</label><br>
+            <input class="email-input" type="email-input" id="user-email" name="user-email"required placeholder="example@gmail.com">
+        </div>
+        <!-- Password -->
+        <div class="register-form-group">
+            <label class="password-label" for="password">*Password:</label>
+            <input class="passsword-input" type="password" id="password" name="password"required placeholder="Enter password"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        </div>
+        <p>Passwords must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.</p>
+
+        <button class="register-button" type="submit">Register</button>
+    </form>
+</section>
