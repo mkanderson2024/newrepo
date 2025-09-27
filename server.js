@@ -45,6 +45,10 @@ app.use(function(req, res, next){
   next()
 })
 
+app.use(express.urlencoded({ extended: false}))
+
+app.use(express.json())
+
 /* ***********************
  * View Engine abd Templates
  * Routes

@@ -4,6 +4,15 @@
     <% } %>
 
     <%# messages () %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <section class="register-form">
     <form method="post">
         <div class="register-form-group">

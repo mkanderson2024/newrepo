@@ -8,6 +8,7 @@ const validate =  {}
  // Declairs the rules of validation
 
 validate.registrationRules = () => {
+    return [
     // First Name required and must be a string
     body("account_firstname")
         .trim()
@@ -46,13 +47,14 @@ validate.registrationRules = () => {
             minSymbols: 1,
         })
         .withMessage("Password does not meet requirements.")
+    ]
 }
 
 /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
 
-validate.checkRegData = async (rec, res, next) => {
+validate.checkRegData = async (req, res, next) => {
     const { account_firstname, account_lastname, account_email} = req.body
     let errors = []
     errors = validationResult(req)
@@ -72,3 +74,5 @@ validate.checkRegData = async (rec, res, next) => {
     }
     next()
 }
+
+module.exports = validate
