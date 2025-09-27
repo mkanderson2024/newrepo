@@ -19,6 +19,7 @@ const utilities = require("./utilities/");
 const errorRoute = require("./routes/errorRoute")
 const session = require("express-session")
 const pool = require('./database/')
+const bodyParser = require("body-parser")
 
 
 /* ***********************
@@ -65,6 +66,9 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 
 app.use(express.static("public"))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true}))
 
 // Account Route
 // app.use("/account", require("./routes/accountRoute"))

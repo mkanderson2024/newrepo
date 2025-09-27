@@ -5,11 +5,11 @@
 
 <%# messages () %>
 <section class="login-form">
-    <form method="post">
+    <form id="loginForm" action="/account/login" method="post">
         <div class="login-form-group">
         <!-- Email -->
             <label class="email-label" for="email">*Email:</label><br>
-            <input class="email-input" type="email-input" id="user-email" name="user-email" required placeholder="example@gmail.com">
+            <input class="email-input" type="email-input" id="account_email" name="account_email" required placeholder="example@gmail.com" value="<%= locals.account_email %>">
         </div>
         <!-- Password -->
         <div class="login-form-group">

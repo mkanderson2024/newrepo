@@ -1,5 +1,7 @@
 const utilities = require(".")
 const { body, validationResult} = require("express-validator")
+const accountModel = require("../models/account-model")
+
 const validate =  {}
 
 /*  **********************************
@@ -32,7 +34,13 @@ validate.registrationRules = () => {
         .notEmpty()
         .isEmail()
         .normalizeEmail()
-        .withMessage("A valid email is required."),
+        .withMessage("A valid email is required.")
+        .custom(async (account_email) => {
+            const emailExists = await accountModel.checkExistingEmail (account_email)
+            if (emailExists){
+                throw new Error ("Email exists. Please log in or use different email")
+            }
+        }),
     
     // Passsword is required and must be a strong password
     body("account_password")
@@ -68,6 +76,50 @@ validate.checkRegData = async (req, res, next) => {
             showUpgrades: false,
             account_firstname,
             account_lastname,
+            account_email,
+        })
+        return
+    }
+    next()
+}
+
+/* ******************************
+ * Login Data Validation Rules
+ * ***************************** */
+validate.loginRules = () => {
+    return[
+        body("account_email")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isEmail()
+        .normalizeEmail()
+        .withMessage("A valid email is required.")
+        .custom(async (account_email) => {
+            const emailExists = await accountModel.checkExisitingEmail (account_email)
+            if (!emailExists){
+                throw new Error ("Email not found. Please check email or register.")
+            }
+        }),
+    ]
+}
+
+/* ******************************
+ * Check Login Data
+ * ***************************** */
+
+validate.checkLoginData = async (req, res, next) => {
+    const { account_email } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()){
+        let nav = await utilities.getNav()
+        res.render("account/login", {
+            errors,
+            title: "Registration",
+            nav,
+            showHero: false,
+            showUpgrades: false,
             account_email,
         })
         return
