@@ -96,6 +96,24 @@ Util.buildDetailsView = function(vehicle){
   return view
 }
 
+Util.buildClassificationDropdown = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationDropdown =
+  '<select name="classification_id" id="vehicle_classification" required>'
+  classificationDropdown += "<option value=' '>Choose a Vehicle Classification</option>"
+  data.rows.forEach((row) => {
+    classificationDropdown += '<option value="' + row.classification_id + '"'
+    if(
+      classification_id != null &&
+      row.classification_id == classification_id
+    ){
+      classificationDropdown += " Selected "
+    }
+    classificationDropdown += ">" + row.classification_name + "</option>"
+    })
+    classificationDropdown += "</select>"
+    return classificationDropdown
+  }
 
 // Exports
 module.exports = Util

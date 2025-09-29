@@ -41,6 +41,59 @@ async function getVehicleDetailsByVehicleId(inv_id){
   }
 }
 
+/* ***************************
+ *  Check for exsisting classifcation
+ * ************************** */
+async function checkExistingClassification(vehicle_class) {
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1";
+    const result = await pool.query(sql, [vehicle_class]);
+    return result.rowCount > 0;
+  } catch (error) {
+    console.error("checkExistingClassification error:", error);
+    throw error;
+  }
+}
+
+/* ***************************
+ *  Adds New Class
+ * ************************** */
+
+async function addNewClass(vehicle_class) {
+  try {
+    const sql = `
+      INSERT INTO classification (classification_name)
+      VALUES ($1)
+      RETURNING classification_id, classification_name
+    `;
+    const result = await pool.query(sql, [vehicle_class]);
+    return result.rows[0];
+  } catch (error) {
+    throw error;
+  }
+}
+
+/* ***************************
+ *  Adds New Inventory
+ * ************************** */
+
+async function addNewInventory(vehicle_make, vehicle_model, vehicle_year, vehicle_description, vehicle_image, vehicle_thumbnail, vehicle_price, vehicle_miles, vehicle_color, vehicle_classification) {
+  try{
+    const sql = `
+      INSERT INTO inventory (
+        inv_make, inv_model, inv_year, inv_description,
+        inv_image, inv_thumbnail, inv_price, inv_miles,
+        inv_color, classification_id
+      )
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+      RETURNING inv_id
+    `
+    return await pool.query(sql, [vehicle_make, vehicle_model, vehicle_year, vehicle_description, vehicle_image, vehicle_thumbnail, vehicle_price, vehicle_miles, vehicle_color, vehicle_classification])
+  } catch (error) {
+    console.error("addNewInventory model error:", error)
+    throw error
+  }
+}
 //Exports
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleDetailsByVehicleId};
+module.exports = {getClassifications, getInventoryByClassificationId, getVehicleDetailsByVehicleId, checkExistingClassification, addNewClass, addNewInventory};

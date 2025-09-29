@@ -1,0 +1,27 @@
+<!-- Content heading -->
+ <% if (title) { %>
+    <h1><%= title %></h1>
+    <% } %>
+
+    <%# messages () %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<section class="add-classification-form">
+    <!-- Adding Classifications -->
+    <form id="addClassificationForm" action="/inv/add-classification" method="post">
+        <div class="vehicleClassification">
+            <label class="vehicle-class" for="vehicle-class">New Vehicle Class:</label>
+            <input class="vehicle-class-input" type="text" id="vehicle_class" name="vehicle_class" required placeholder="Ex: Van" value="<%= locals.vehicle_class %>"
+                pattern="^[A-Z][a-z]*$">
+        </div>
+        <p>New class must not contain a space or special character of any kind and contain a capitol letter for the first letter only.</p>
+        <button class="add-classification-button" type="submit">Add Classification</button>
+    </form>
+</section>
