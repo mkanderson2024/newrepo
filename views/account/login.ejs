@@ -3,7 +3,14 @@
     <h1><%= title %></h1>
     <% } %>
 
-<%# messages () %>
+<% if (messages('notice')) { %>
+    <div class="flash-notice">
+        <% messages('notice').forEach(function(msg) { %>
+            <p><%= msg %></p>
+        <% }) %>
+    </div>
+<% } %>
+
 <section class="login-form">
     <form id="loginForm" action="/account/login" method="post">
         <div class="login-form-group">

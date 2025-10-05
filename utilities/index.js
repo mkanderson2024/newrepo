@@ -3,6 +3,26 @@ const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 
+Util.checkJWT = (req, res, next) => {
+    const token =req.cookies?.jwt
+    if (token) {
+        try{
+            const userData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+            res.locals.user = {
+                id: userData.account_id,
+                type: userData.account_type,
+                email: userData.account_email
+            }
+        } catch (err) {
+            console.error("Invalid JWT:", err.message)
+            res.locals.user = null;
+        }
+    } else {
+        res.locals.user = null;
+    }
+    next()
+}
+
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -33,7 +53,7 @@ Util.getNav = async function (req, res, next) {
  * General Error Handling
  **************************************** */
 
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
 
 
 /* **************************************
@@ -185,6 +205,7 @@ Util.buildClassificationList = async function(inv_id) {
   }
 }
 
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 // Exports
 module.exports = Util

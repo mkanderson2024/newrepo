@@ -26,11 +26,9 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // Process the login attempt
 router.post(
     "/login",
-    (req, res) => {
         regValidate.loginRules(),
         regValidate.checkLoginData,
         utilities.handleErrors(accountController.accountLogin)
-    }
 )
 
 module.exports = router;

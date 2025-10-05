@@ -22,10 +22,11 @@ const pool = require('./database/')
 const bodyParser = require("body-parser")
 const cookieParser =  require("cookie-parser")
 
-
 /* ***********************
  * Middleware
  * ************************/
+app.use(cookieParser())
+
 
 //Session
 app.use(session({
@@ -39,6 +40,13 @@ app.use(session({
   name: 'sessionId',
 }))
 
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next()
+})
+
+app.use(utilities.checkJWT)
+
 // Express Messages Middileware
 
 app.use(require('connect-flash')())
@@ -51,7 +59,9 @@ app.use(express.urlencoded({ extended: false}))
 
 app.use(express.json())
 
-app.use(cookieParser())
+
+
+
 
 app.use(utilities.checkJWTToken)
 

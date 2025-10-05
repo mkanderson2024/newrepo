@@ -1,8 +1,23 @@
+<% if (messages('notice')) { %>
+    <div class="flash-notice">
+        <% messages('notice').forEach(function(msg) { %>
+            <p><%= msg %></p>
+        <% }) %>
+    </div>
+<% } %>
+
 <header id="top-header">
     <span class="siteName">
         <a href="/" title="Return to home page" class ="homeLink">CSE Motors</a>
     </span>
     <div id="tools">
+        <!-- Displays when logged in -->
+        <% if (user) { %>
+        <a title="Click to manage account" href="/account/management">Welcome <%= user.type %></a>
+        <a title="Click to log out" href="/account/logout">Logout</a>
+        <!-- Displays when logged out -->
+        <% } else { %>
         <a title="Click to log in" href="/account/login" class="toolsLink">My Account</a>
+        <% } %>
     </div>
 </header>
