@@ -1,0 +1,52 @@
+<!-- Content heading -->
+ <% if (title) { %>
+    <h1><%= title %></h1>
+    <% } %>
+
+    <%# messages () %>
+
+<% if (errors && errors.length > 0) { %>
+  <ul class="notice">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<section class="add-inventory-form">
+    <!-- Adding Classifications -->
+    <form id="deleteForm" action="/inv/delete" method="post">
+        <!-- Vehicle Make -->
+        <div class="add-inventory-components">
+            <label class="vehicle-make" for="vehicle-make">Make:</label>
+            <input class="vehicle-make-input" type="text" id="vehicle_make" name="vehicle_make" required placeholder="Ex: Saturn" value="<%= vehicle_make %>" readonly
+                pattern="^[A-Z][a-z]*$">
+        </div>
+        <!-- Vehicle Model -->
+        <div class="add-inventory-components">
+            <label class="vehicle-model" for="vehicle-model">Model:</label>
+            <input class="vehicle-model-input" type="text" id="vehicle_model" name="vehicle_model" required placeholder="Ex: Ion" value="<%= vehicle_model %>" readonly
+                pattern="^[A-Z][a-z]*$">
+        </div>
+        <!-- Vehicle Year -->
+        <div class="add-inventory-components">
+            <label class="vehicle-year" for="vehicle-year">Year:</label>
+            <input class="vehicle-year-input" type="text" id="vehicle_year" name="vehicle_year" required placeholder="Ex: 2025" value="<%= vehicle_year %>" readonly
+                pattern="^[0-9]{4}$">
+        </div>
+        <!-- Vehicle Description -->
+        <!-- Vehicle Image -->
+        <!-- Vehicle Thumbnail -->     
+        <!-- Vehicle Price -->
+        <div class="add-inventory-components">
+            <label class="vehicle-price" for="vehicle-price">Price:</label>
+            <input class="vehicle-price-input" type="text" id="vehicle_price" name="vehicle_price" required placeholder="Ex: 6500" value="<%= vehicle_price %>"
+                pattern="^[0-9]+$">
+        </div>
+        <!-- Vehicle Miles -->
+        <!-- Vehicle Color -->
+        <p>Confirm Deletion - The delete is permanent.</p>                    
+        <button class="add-classification-button" type="submit">Delete Vehicle</button>
+        <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    </form>
+</section>

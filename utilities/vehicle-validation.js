@@ -91,18 +91,18 @@ validate.inventoryDataRules = () => {
         //Vehicle Image
         body("vehicle_image")
         .trim()
-        .escape()
+        // .escape()
         .notEmpty()
         .isLength({ min: 1}).withMessage("Please provide image name.")
-        .matches(/^[A-Za-z?.!]*$/).withMessage("Only letters are allowed."),
+        .matches(/^\/?[\w\/.-]+$/).withMessage("Must be a valid path (letters, numbers, /, -, . only)"),
 
         //Vehicle Thumbnail
         body("vehicle_thumbnail")
         .trim()
-        .escape()
+        // .escape()
         .notEmpty()
         .isLength({ min: 1}).withMessage("Please provide thumbnail name.")
-        .matches(/^[A-Za-z?.!]*$/).withMessage("Only letters are allowed."),
+        .matches(/^\/?[\w\/.-]+$/).withMessage("Must be a valid path (letters, numbers, /, -, . only)"),
 
         //Vehicle Price
         body("vehicle_price")
@@ -155,6 +155,36 @@ validate.checkVehicleData = async function (req, res, next) {
             nav,
             showHero: false,
             showUpgrades: false,
+            vehicle_make,
+            vehicle_model,
+            vehicle_year,
+            vehicle_description,
+            vehicle_image,
+            vehicle_thumbnail,
+            vehicle_price,
+            vehicle_miles,
+            vehicle_color,
+            vehicle_classification
+    })
+        return
+    }
+    next()
+}
+
+validate.checkVehicleUpdateData = async function (req, res, next) {
+    const { inv_id, vehicle_make, vehicle_model, vehicle_year, vehicle_description, vehicle_image, vehicle_thumbnail,
+            vehicle_price, vehicle_miles, vehicle_color, vehicle_classification } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()){
+        let nav = await utilities.getNav()
+        res.render("./inventory/edit-inventory", {
+            title: "Edit Vehicle",
+            nav,
+            showHero: false,
+            showUpgrades: false,
+            errors: errors.array(),
+            inv_id,
             vehicle_make,
             vehicle_model,
             vehicle_year,

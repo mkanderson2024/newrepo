@@ -101,21 +101,23 @@ Util.buildDetailsView = function(vehicle){
 Util.buildClassificationDropdown = async function (classification_id = null) {
   let data = await invModel.getClassifications()
   let classificationDropdown =
-  '<select name="classification_id" id="vehicle_classification" required>'
-  classificationDropdown += "<option value=' '>Choose a Vehicle Classification</option>"
+    '<select name="classification_id" id="classificationList" required>'
+  classificationDropdown += "<option value=''>Choose a Vehicle Classification</option>"
+
   data.rows.forEach((row) => {
     classificationDropdown += '<option value="' + row.classification_id + '"'
-    if(
+    if (
       classification_id != null &&
       row.classification_id == classification_id
-    ){
-      classificationDropdown += " Selected "
+    ) {
+      classificationDropdown += " selected"
     }
     classificationDropdown += ">" + row.classification_name + "</option>"
-    })
-    classificationDropdown += "</select>"
-    return classificationDropdown
-  }
+  })
+
+  classificationDropdown += "</select>"
+  return classificationDropdown
+}
 
 /* ****************************************
 * Middleware to check token validity
@@ -151,6 +153,38 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+ /* ****************************************
+ *  Get the data needed for the edit view
+ * ************************************ */
+
+Util.buildClassificationList = async function(inv_id) {
+  // Get vehicle data
+  const itemData = await invModel.getVehicleDetailsByVehicleId(inv_id)
+  if (!itemData) return null
+  const classificationData = await invModel.getClassifications()
+  const classifications = classificationData.rows.map(row => ({
+    classification_id: row.classification_id,
+    classification_name: row.classification_name,
+    selected: row.classification_id === itemData.classification_id
+  }))
+  return {
+    vehicle: {
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_description: itemData.inv_description,
+      inv_image: itemData.inv_image,
+      inv_thumbnail: itemData.inv_thumbnail,
+      inv_price: itemData.inv_price,
+      inv_miles: itemData.inv_miles,
+      inv_color: itemData.inv_color
+    },
+    classifications
+  }
+}
+
 
 // Exports
 module.exports = Util

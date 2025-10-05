@@ -15,66 +15,65 @@
 
 <section class="add-inventory-form">
     <!-- Adding Classifications -->
-    <form id="addInventoryForm" action="/inv/update" method="post">
+    <form id="updateForm" action="/inv/update" method="post">
         <!-- Vehicle Make -->
         <div class="add-inventory-components">
             <label class="vehicle-make" for="vehicle-make">Make:</label>
-            <input class="vehicle-make-input" type="text" id="vehicle_make" name="vehicle_make" required placeholder="Ex: Saturn" value="<%= locals.vehicle_make %>"
+            <input class="vehicle-make-input" type="text" id="vehicle_make" name="vehicle_make" required placeholder="Ex: Saturn" value="<%= vehicle_make %>"
                 pattern="^[A-Z][a-z]*$">
         </div>
         <!-- Vehicle Model -->
         <div class="add-inventory-components">
             <label class="vehicle-model" for="vehicle-model">Model:</label>
-            <input class="vehicle-model-input" type="text" id="vehicle_model" name="vehicle_model" required placeholder="Ex: Ion" value="<%= locals.vehicle_model %>"
+            <input class="vehicle-model-input" type="text" id="vehicle_model" name="vehicle_model" required placeholder="Ex: Ion" value="<%= vehicle_model %>"
                 pattern="^[A-Z][a-z]*$">
         </div>
         <!-- Vehicle Year -->
         <div class="add-inventory-components">
             <label class="vehicle-year" for="vehicle-year">Year:</label>
-            <input class="vehicle-year-input" type="text" id="vehicle_year" name="vehicle_year" required placeholder="Ex: 2025" value="<%= locals.vehicle_year %>"
+            <input class="vehicle-year-input" type="text" id="vehicle_year" name="vehicle_year" required placeholder="Ex: 2025" value="<%= vehicle_year %>"
                 pattern="^[0-9]{4}$">
         </div>
         <!-- Vehicle Description -->
         <div class="add-inventory-components">
             <label class="vehicle-description" for="vehicle-description">Description:</label>
             <textarea class="vehicle-description-input" rows="10" cols="50" id="vehicle_description" name="vehicle_description" required placeholder="Enter Description"
-                pattern="^[\w\s.,!?-]*$"><%= locals.vehicle_description %></textarea>
+                pattern="^[\w\s.,!?-]*$"><%= vehicle_description %></textarea>
         </div>
         <!-- Vehicle Image -->
         <div class="add-inventory-components">
             <label class="vehicle-image" for="vehicle-image">Image Name:</label>
-            <input class="vehicle-image-input" type="text" id="vehicle_image" name="vehicle_image" required placeholder="Ex: Saturn" value="<%= locals.vehicle_image %>"
-                pattern="^[A-Z][a-z]*$">
+            <input class="vehicle-image-input" type="text" id="vehicle_image" name="vehicle_image" required placeholder="Ex: Saturn" value="<%= vehicle_image %>"
+                pattern="^[\w\-.\\/]+$">
         </div>
         <!-- Vehicle Thumbnail -->     
         <div class="add-inventory-components">
             <label class="vehicle-thumbnail" for="vehicle-model">Thumbnail Name:</label>
-            <input class="vehicle-model-thumbnail" type="text" id="vehicle_thumbnail" name="vehicle_thumbnail" required placeholder="Ex: Saturn" value="<%= locals.vehicle_thumbnail %>"
-                pattern="^[A-Z][a-z]*$">
+            <input class="vehicle-model-thumbnail" type="text" id="vehicle_thumbnail" name="vehicle_thumbnail" required placeholder="Ex: Saturn" value="<%= vehicle_thumbnail %>"
+                pattern="^[\w\-.\\/]+$">
         </div>
         <!-- Vehicle Price -->
         <div class="add-inventory-components">
             <label class="vehicle-price" for="vehicle-price">Price:</label>
-            <input class="vehicle-price-input" type="text" id="vehicle_price" name="vehicle_price" required placeholder="Ex: 6500" value="<%= locals.vehicle_price %>"
+            <input class="vehicle-price-input" type="text" id="vehicle_price" name="vehicle_price" required placeholder="Ex: 6500" value="<%= vehicle_price %>"
                 pattern="^[0-9]+$">
         </div>
         <!-- Vehicle Miles -->
         <div class="add-inventory-components">
             <label class="vehicle-miles" for="vehicle-miles">Miles:</label>
-            <input class="vehicle-miles-input" type="text" id="vehicle_miles" name="vehicle_miles" required placeholder="Ex: 216540" value="<%= locals.vehicle_miles %>"
+            <input class="vehicle-miles-input" type="text" id="vehicle_miles" name="vehicle_miles" required placeholder="Ex: 216540" value="<%= vehicle_miles %>"
                 pattern="^[0-9]+$">
         </div>
         <!-- Vehicle Color -->
         <div class="add-inventory-components">
             <label class="vehicle-color" for="vehicle-color">Color:</label>
-            <input class="vehicle-color-input" type="text" id="vehicle_color" name="vehicle_color" required placeholder="Ex: Green" value="<%= locals.vehicle_color %>"
+            <input class="vehicle-color-input" type="text" id="vehicle_color" name="vehicle_color" required placeholder="Ex: Green" value="<%= vehicle_color %>"
                 pattern="^[A-Z][a-z]*$">
-        </div>
-        <!-- Vehicle Classification -->
-        <div class="add-inventory-components">
-            <%- classificationDropdown %>
         </div>
         <p>All categories are required, must not contain special characters or spaces. For description, spaces and punctuation are allowed.</p>                    
         <button class="add-classification-button" type="submit">Update Vehicle</button>
+        <input type="hidden" name="inv_id" value="<%= inv_id %>">
     </form>
 </section>
+
+<script src="/js/inventory.js"></script>
