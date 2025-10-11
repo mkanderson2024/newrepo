@@ -5,7 +5,7 @@ const signupModel = require("../models/signup-model")
 const validate = {}
 
 /*  **********************************
-  *  Registration Data Validation Rules
+  *  Signup Valadation Rules
   * ********************************* */
  // Declaires the rules of validation
 
@@ -26,6 +26,11 @@ const validate = {}
          })
         ]
     }
+
+/*  **********************************
+  * Verifies validation of data
+  * ********************************* */
+ // Declaires the rules of validation
 
     validate.checkSignupData = async (req, res, next) => {
         const { signup_email } = req.body
