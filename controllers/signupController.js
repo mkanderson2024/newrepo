@@ -6,7 +6,7 @@ async function buildSignupManagement (req, res, next) {
         let nav = await utilities.getNav()
         let exsistingEmails = await signupModel.getEmailList()
 
-        let emailList = "<ul>"
+        let emailList = '<ul class="email-list">'
         if (exsistingEmails && exsistingEmails.length > 0) {
             exsistingEmails.forEach(element => {
                 emailList += `<li>${element.signup_email}</li>`

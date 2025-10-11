@@ -27,6 +27,15 @@
   font-family: "kanit";
 }
 
+.email-list {
+  font-family: "abel";
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-top: 5px solid #6699CC;
+  border-bottom: 5px solid #6699CC;
+}
+
 #top-header{
   display: flex;
   justify-content: space-between;
@@ -133,14 +142,14 @@ h3{
   font-size: 25px;
 }
 
-.login-button, .register-button{
+.login-button, .register-button, .signup-button{
   display: block;
   margin: 0 auto;
   font-family: "kanit";
   font-size: 25px;
 }
 
-.login-form, .register-form, .add-inventory-form{
+.login-form, .register-form, .add-inventory-form, .signUp-form{
   font-size: 25px;
   background-color: #6699CC;
   border-radius: 5px;
@@ -166,6 +175,20 @@ h3{
 .password-label{
   font-family: "kanit";
 }
+
+.signup-management {
+  font-family: "kanit";
+  font-size: 20px;
+  background-color:#6699CC;
+  color: white;
+  border-radius: 10px;
+  padding: 3px;
+  text-decoration: none;
+}
+.signup-management:hover {
+  background-color:#FF8C42;
+}
+
 
 .toolsLink{
   text-decoration: none;
