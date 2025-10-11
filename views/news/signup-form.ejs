@@ -1,0 +1,29 @@
+<!-- Content heading -->
+
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } %>
+
+<!-- Flash Messages -->
+<%- messages() %>
+
+<!-- Validation Errors (optional) -->
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<section class="signUp-form"> 
+    <form action="/news/signup-form" method="POST">
+        <div calss="signUp-form-email">
+            <label class="email-label" for="signup_email">*Email:</label>
+            <input class="email-input" type="email" id="signup_email" name="signup_email" required placeholder="example@gmail.com"
+            value="<%= locals.signup_email || '' %>">
+        </div>
+        <p>Must enter a proper email. Must not be an email that already exsists.</p>
+        <button class="signup-button" types="submit">Sign Up</button>
+    </form>
+</section>

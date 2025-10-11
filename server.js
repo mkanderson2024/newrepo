@@ -15,6 +15,7 @@ const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
+const signupRoute = require("./routes/signupRoute")
 const utilities = require("./utilities/");
 const errorRoute = require("./routes/errorRoute")
 const session = require("express-session")
@@ -86,9 +87,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 
 // Account Route
-// app.use("/account", require("./routes/accountRoute"))
+
 app.use("/account", accountRoute)
 
+app.use("/news", signupRoute)
 // Errors Routes
 app.use("/errors", errorRoute)
 

@@ -1,0 +1,30 @@
+<!-- Page Heading -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } %>
+
+<!-- Flash Messages -->
+<%- messages() %>
+
+<!-- Validation Errors (optional) -->
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<!-- Link to Add New Email -->
+<a class="signup-management-access" title="Click to add a new signup email" href="/news/signup-form">
+    Enter New Email
+</a>
+
+<!-- Existing Emails List -->
+<h2>Existing Newsletter Emails</h2>
+
+<% if (emailList) { %>
+    <%- emailList %>
+<% } else { %>
+    <p>No emails to display yet.</p>
+<% } %>
